@@ -1,20 +1,21 @@
 <template>
   <v-card
-    class="mx-auto my-14 main-card pb-16"
     :color="tipo"
+    class="mx-auto my-14 main-card pb-16"
     shaped
     dark
     max-width="374"
   >
-    <img
+    <!-- <img
       class="avatar-pokemon"
       :src="pokemon.sprites.other['official-artwork'].front_default"
       alt=""
-    />
+    /> -->
+
     <v-card-title
       class="capitalize d-flex justify-center display-1 font-weight-bold"
     >
-      {{ pokemon.name }}
+      {{ poke.name }}
     </v-card-title>
 
     <v-card-text class="rounded-xl pb-16 white">
@@ -51,7 +52,7 @@
       </v-row>
     </v-card-text>
 
-    <v-card shaped class="sprites">
+    <!-- <v-card shaped class="sprites">
       <v-card-actions>
         <v-btn text> Stats</v-btn>
         <v-spacer></v-spacer>
@@ -68,7 +69,9 @@
           <v-row class="m-0">
             <v-col cols="4" v-for="stat in pokemon.stats" :key="stat.id">
               <h5 class="capitalize text-center">{{ stat.stat.name }}</h5>
-              <h5 class="text-center mt-1 font-weight-regular">{{ stat.base_stat }}</h5>
+              <h5 class="text-center mt-1 font-weight-regular">
+                {{ stat.base_stat }}
+              </h5>
             </v-col>
           </v-row>
         </div>
@@ -129,15 +132,19 @@
           </v-row>
         </div>
       </v-expand-transition>
-    </v-card>
+    </v-card> -->
   </v-card>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import axios from "axios";
+
 export default {
+  props: { poke: Object },
+  name: "CardPokemon",
   data() {
     return {
+      pokemon: "",
       showSprite: false,
       showDream: false,
       showStats: false,
@@ -145,7 +152,17 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getPokemon"]),
+    async getPokemon() {
+      let poke = this.poke;
+      try {
+        let datos = await axios.get(poke.url);
+        this.pokemon = datos.data;
+      } catch (error) {
+        console.log(error);
+      } finally {
+        console.log();
+      }
+    },
     colourtype() {
       let type = this.pokemon.types[0].type.name;
       switch (type) {
@@ -208,10 +225,7 @@ export default {
       }
     },
   },
-  computed: {
-    ...mapState(["pokemon"]),
-  },
-  created() {
+  mounted() {
     this.getPokemon();
   },
   updated() {
@@ -239,4 +253,4 @@ export default {
   margin-top: -100px
   margin-bottom: -50px
   width: 100%
-</style>>
+</style>
