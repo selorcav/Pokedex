@@ -6,11 +6,11 @@
     dark
     max-width="374"
   >
-    <!-- <img
+    <img
       class="avatar-pokemon"
       :src="pokemon.sprites.other['official-artwork'].front_default"
       alt=""
-    /> -->
+    />
 
     <v-card-title
       class="capitalize d-flex justify-center display-1 font-weight-bold"
@@ -52,13 +52,13 @@
       </v-row>
     </v-card-text>
 
-    <!-- <v-card shaped class="sprites">
+    <v-card shaped class="sprites">
       <v-card-actions>
         <v-btn text> Stats</v-btn>
         <v-spacer></v-spacer>
         <v-btn icon @click="showStats = !showStats">
           <v-icon>{{
-            showStats ? "mdi-chevron-up" : "mdi-chevron-down"
+            showStats ?  "mdi-chevron-down" : "mdi-chevron-up" 
           }}</v-icon>
         </v-btn>
       </v-card-actions>
@@ -82,7 +82,7 @@
         <v-spacer></v-spacer>
         <v-btn icon @click="showSprite = !showSprite">
           <v-icon>{{
-            showSprite ? "mdi-chevron-up" : "mdi-chevron-down"
+            showSprite ?  "mdi-chevron-down" : "mdi-chevron-up"
           }}</v-icon>
         </v-btn>
       </v-card-actions>
@@ -117,7 +117,7 @@
         <v-spacer></v-spacer>
         <v-btn icon @click="showDream = !showDream">
           <v-icon>{{
-            showDream ? "mdi-chevron-up" : "mdi-chevron-down"
+            showDream ? "mdi-chevron-down" : "mdi-chevron-up" 
           }}</v-icon>
         </v-btn>
       </v-card-actions>
@@ -132,7 +132,7 @@
           </v-row>
         </div>
       </v-expand-transition>
-    </v-card> -->
+    </v-card>
   </v-card>
 </template>
 
@@ -149,6 +149,7 @@ export default {
       showDream: false,
       showStats: false,
       tipo: "",
+
     };
   },
   methods: {
@@ -225,7 +226,7 @@ export default {
       }
     },
   },
-  mounted() {
+  created() {
     this.getPokemon();
   },
   updated() {

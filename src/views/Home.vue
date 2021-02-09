@@ -1,7 +1,9 @@
 <template>
   <v-app class="indigo lighten-5">
     <v-container>
-      <h1>Pokemon</h1>
+      <div class="d-flex justify-center">
+        <v-img max-width="300px" src="../assets/img/logopokemon.png"></v-img>
+      </div>
       <PokemonList />
     </v-container>
   </v-app>
