@@ -13,10 +13,10 @@ export default new Vuex.Store({
   },
   actions: {
     getPokemon({ commit }){
-      axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=00&limit=151`)
+      axios.get(`https://pokeapi.co/api/v2/pokemon/`)
       .then(response => commit("GET_POKEMON", response.data))
-      
     },
+    
 
   },
   modules: {
