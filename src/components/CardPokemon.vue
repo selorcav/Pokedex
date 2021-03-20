@@ -2,6 +2,7 @@
   <v-card
     :color="tipo"
     class="mx-auto my-14 main-card pb-16"
+    
     shaped
     dark
     max-width="374"
