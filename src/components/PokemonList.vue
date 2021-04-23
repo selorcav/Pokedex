@@ -37,19 +37,17 @@ export default {
   },
   methods: {
     // ...mapActions(["getPokemon"]),
-    async getPokemon() {
-      try {
-        let datos = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/`
-        );
-        this.pokemon = datos.data;
-        // console.log(this.pokemon)
-      } catch (error) {
-        console.log(error);
-      } finally {
-        console.log();
-      }
-    },
+    getPokemon() {
+      axios.get(`https://pokeapi.co/api/v2/pokemon/`) 
+        .then((resp)=>{
+          this.pokemon = resp.data
+          // console.log(resp.data)
+        })
+        .catch((error)=>{
+          console.log(error)
+        })
+    }
+    ,
 
     async nextPokemon(){
       this.nextUrl = this.pokemon.next

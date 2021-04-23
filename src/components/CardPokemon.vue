@@ -2,16 +2,18 @@
   <v-card
     :color="tipo"
     class="mx-auto my-14 main-card pb-16"
-    
+
     shaped
     dark
     max-width="374"
   >
+  <div v-if="pokemon.sprites">
     <img
       class="avatar-pokemon"
       :src="pokemon.sprites.other['official-artwork'].front_default"
       alt=""
     />
+  </div>
 
     <v-card-title
       class="capitalize d-flex justify-center display-1 font-weight-bold"
@@ -59,7 +61,7 @@
         <v-spacer></v-spacer>
         <v-btn icon @click="showStats = !showStats">
           <v-icon>{{
-            showStats ?  "mdi-chevron-down" : "mdi-chevron-up" 
+            showStats ?  "mdi-chevron-down" : "mdi-chevron-up"
           }}</v-icon>
         </v-btn>
       </v-card-actions>
@@ -88,7 +90,7 @@
         </v-btn>
       </v-card-actions>
 
-      <v-expand-transition>
+      <v-expand-transition v-if="pokemon.sprites">
         <div v-show="showSprite" class="white overflow-hidden">
           <v-divider></v-divider>
           <v-row>
@@ -118,7 +120,7 @@
         <v-spacer></v-spacer>
         <v-btn icon @click="showDream = !showDream">
           <v-icon>{{
-            showDream ? "mdi-chevron-down" : "mdi-chevron-up" 
+            showDream ? "mdi-chevron-down" : "mdi-chevron-up"
           }}</v-icon>
         </v-btn>
       </v-card-actions>
@@ -126,7 +128,7 @@
       <v-expand-transition>
         <div v-show="showDream" class="white overflow-hidden">
           <v-divider></v-divider>
-          <v-row>
+          <v-row v-if="pokemon.sprites">
             <v-col class="px-16 py-10">
               <v-img :src="pokemon.sprites.other.dream_world.front_default" />
             </v-col>
@@ -145,7 +147,8 @@ export default {
   name: "CardPokemon",
   data() {
     return {
-      pokemon: "",
+      pokemon: {
+      },
       showSprite: false,
       showDream: false,
       showStats: false,
@@ -159,6 +162,7 @@ export default {
       try {
         let datos = await axios.get(poke.url);
         this.pokemon = datos.data;
+        // console.log(datos.data)
       } catch (error) {
         console.log(error);
       } finally {
@@ -227,7 +231,7 @@ export default {
       }
     },
   },
-  mounted() {
+  created() {
     this.getPokemon();
   },
   updated() {
