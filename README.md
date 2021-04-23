@@ -27,4 +27,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## App Preview
 
-![alt text](https://github.com/selorcav/pokecard/app-preview.png)
+![alt text](https://github.com/selorcav/pokecard/blob/master/app-preview.png)
